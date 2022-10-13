@@ -20,7 +20,6 @@ const (
 	SELECT
 		name,
 		description,
-		max_weight,
 		price,
 		discount,
 		stock
