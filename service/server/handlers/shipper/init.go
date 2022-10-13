@@ -1,17 +1,17 @@
-package shipper
+package shop
 
-import "github.com/HugoIr/steve-shop/service/shippermodule"
+import "github.com/HugoIr/steve-shop/service/shopmodule"
 
 type InsertProductResponse struct {
 	ID int64 `json:"id"`
 }
 
 type Handler struct {
-	shipper *shippermodule.Module
+	shop *shopmodule.Module
 }
 
-func NewProductHandler(p *shippermodule.Module) *Handler {
+func NewProductHandler(p *shopmodule.Module) *Handler {
 	return &Handler{
-		shipper: p,
+		shop: p,
 	}
 }

@@ -1,4 +1,4 @@
-package shipper
+package shop
 
 import (
 	"context"
@@ -40,7 +40,7 @@ func (p *Handler) AddProductHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := p.shipper.AddProduct(context.Background(), data)
+	res, err := p.shop.AddProduct(context.Background(), data)
 	if err != nil {
 		server.RenderError(w, http.StatusBadRequest, err, timeStart)
 		return
@@ -66,7 +66,7 @@ func (p *Handler) GetProductHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp, err := p.shipper.GetProduct(context.Background(), queryID)
+	resp, err := p.shop.GetProduct(context.Background(), queryID)
 	if err != nil {
 		server.RenderError(w, http.StatusBadRequest, err, timeStart)
 		return
@@ -81,7 +81,7 @@ func (p *Handler) GetProductAllHandler(w http.ResponseWriter, r *http.Request) {
 	timeStart := time.Now()
 	var err error
 
-	resp, err := p.shipper.GetProductAll(context.Background())
+	resp, err := p.shop.GetProductAll(context.Background())
 	if err != nil {
 		server.RenderError(w, http.StatusBadRequest, err, timeStart)
 		return
@@ -116,7 +116,7 @@ func (p *Handler) UpdateProductHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp, err := p.shipper.UpdateProduct(context.Background(), queryID, data)
+	resp, err := p.shop.UpdateProduct(context.Background(), queryID, data)
 	if err != nil {
 		server.RenderError(w, http.StatusBadRequest, err, timeStart)
 		return
@@ -138,7 +138,7 @@ func (p *Handler) RemoveProductHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp, err := p.shipper.RemoveProduct(context.Background(), queryID)
+	resp, err := p.shop.RemoveProduct(context.Background(), queryID)
 	if err != nil {
 		server.RenderError(w, http.StatusBadRequest, err, timeStart)
 		return

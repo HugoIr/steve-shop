@@ -9,8 +9,8 @@ import (
 
 	"github.com/HugoIr/steve-shop/service/database"
 	"github.com/HugoIr/steve-shop/service/server"
-	shipperHandler "github.com/HugoIr/steve-shop/service/server/handlers/shipper"
-	"github.com/HugoIr/steve-shop/service/shippermodule"
+	shopHandler "github.com/HugoIr/steve-shop/service/server/handlers/shop"
+	"github.com/HugoIr/steve-shop/service/shopmodule"
 )
 
 func main() {
@@ -27,13 +27,13 @@ func main() {
 	log.Println("Initializing DB Connection")
 	db := database.GetDatabaseConnection(dbConfig)
 
-	// Init shipper usecase
+	// Init shop usecase
 	log.Println("Initializing Usecase")
-	sm := shippermodule.NewProductModule(db)
+	sm := shopmodule.NewProductModule(db)
 
-	// Init shipper handler
+	// Init shop handler
 	log.Println("Initializing Handler")
-	sh := shipperHandler.NewProductHandler(sm)
+	sh := shopHandler.NewProductHandler(sm)
 
 	router := mux.NewRouter()
 
@@ -50,7 +50,7 @@ func main() {
 		ReadTimeout:  5 * time.Second,
 		Port:         9090,
 	}
-	log.Println("Devcamp-2022-snd shipper service service is starting...")
+	log.Println("Devcamp-2022-snd shop service service is starting...")
 
 	server.Serve(serverConfig, router)
 }

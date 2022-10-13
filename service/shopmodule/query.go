@@ -1,4 +1,4 @@
-package shippermodule
+package shopmodule
 
 const (
 	addProductQuery = `
