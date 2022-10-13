@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	m "github.com/HugoIr/steve-shop/service/model"
+	m "github.com/HugoIr/steve-shop/service/entity/product"
 )
 
 func SanitizeInsert(param m.ProductRequest) (m.ProductRequest, error) {

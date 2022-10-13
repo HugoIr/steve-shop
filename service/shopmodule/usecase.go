@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	m "github.com/HugoIr/steve-shop/service/model"
+	m "github.com/HugoIr/steve-shop/service/entity/product"
 )
 
 func (p *Module) AddProduct(ctx context.Context, data m.ProductRequest) (result m.ProductResponse, err error) {

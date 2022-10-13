@@ -12,7 +12,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/HugoIr/steve-shop/service/model"
+	model "github.com/HugoIr/steve-shop/service/entity/product"
 
 	"github.com/HugoIr/steve-shop/service/server"
 )

@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"log"
 
-	m "github.com/HugoIr/steve-shop/service/model"
+	m "github.com/HugoIr/steve-shop/service/entity/product"
 )
 
 type storage struct {
