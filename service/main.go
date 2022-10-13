@@ -38,11 +38,11 @@ func main() {
 	router := mux.NewRouter()
 
 	// REST Handlers
-	router.HandleFunc("/shipper", sh.AddProductHandler).Methods(http.MethodPost)
-	router.HandleFunc("/shipper/{id}", sh.UpdateProductHandler).Methods(http.MethodPut)
-	router.HandleFunc("/shipper/{id}", sh.GetProductHandler).Methods(http.MethodGet)
-	router.HandleFunc("/shipper/{id}", sh.RemoveProductHandler).Methods(http.MethodDelete)
-	router.HandleFunc("/shippers", sh.GetProductAllHandler).Methods(http.MethodGet)
+	router.HandleFunc("/product", sh.AddProductHandler).Methods(http.MethodPost)
+	router.HandleFunc("/product/{id}", sh.UpdateProductHandler).Methods(http.MethodPut)
+	router.HandleFunc("/product/{id}", sh.GetProductHandler).Methods(http.MethodGet)
+	router.HandleFunc("/product/{id}", sh.RemoveProductHandler).Methods(http.MethodDelete)
+	router.HandleFunc("/products", sh.GetProductAllHandler).Methods(http.MethodGet)
 	router.HandleFunc("/", sh.RootHandler).Methods(http.MethodGet)
 
 	serverConfig := server.Config{

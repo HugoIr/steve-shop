@@ -1,3 +1,9 @@
-module github.com/HugoIr/steve-shop
+module github.com/HugoIr/steve-shop/service
 
 go 1.18
+
+
+require (
+	github.com/gorilla/mux v1.8.0
+	github.com/lib/pq v1.10.7
+)

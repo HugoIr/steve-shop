@@ -2,38 +2,30 @@ package shippermodule
 
 const (
 	addProductQuery = `
-	INSERT INTO shipper (
+	INSERT INTO product (
 		name,
-		image_url,
 		description,
-		max_weight,
-		created_at,
-		created_by,
-		updated_at,
-		updated_by
+		price,
+		discount,
+		stock,
 	) VALUES (
 		$1,
 		$2,
 		$3,
 		$4,
 		$5,
-		$6,
-		$7,
-		$8
 	) returning id
 `
 	getProductQuery = `
 	SELECT
 		name,
-		image_url,
 		description,
 		max_weight,
-		created_at,
-		created_by,
-		updated_at,
-		updated_by
+		price,
+		discount,
+		stock,
 	FROM
-		shipper
+		product
 	WHERE
 		id=$1
 `
@@ -42,23 +34,20 @@ const (
 	SELECT
 		*
 	FROM
-		shipper
+		product
 `
 
 	updateProductQuery = `
 	UPDATE
-		shipper
+		product
 	SET
 		name=$1,
-		image_url=$2,
-		description=$3,
-		max_weight=$4,
-		created_at=$5,
-		created_by=$6,
-		updated_at=$7,
-		updated_by=$8
+		description=$2,
+		price=$3,
+		discount=$4,
+		stock=$5,
 	WHERE
-		id=$9
+		id=$6
 	returning id	
 	
 `
@@ -66,7 +55,7 @@ const (
 	removeProductQuery = `
 	
 	DELETE FROM
-		shipper
+		product
 	WHERE
 		id=$1
 `

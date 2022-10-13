@@ -22,13 +22,10 @@ func (s *storage) AddProduct(ctx context.Context, data m.ProductRequest) (result
 	var id int64
 	if err := s.ProductDB.QueryRowContext(ctx, addProductQuery,
 		data.Name,
-		data.ImageURL,
 		data.Description,
-		data.MaxWeight,
-		data.CreatedAt,
-		data.CreatedBy,
-		data.UpdatedAt,
-		data.UpdatedBy,
+		data.Price,
+		data.Discount,
+		data.Stock,
 	).Scan(&id); err != nil {
 		log.Println("[ProductModule][AddProduct][Storage] problem querying to db, err: ", err.Error())
 		return result, err
@@ -42,13 +39,10 @@ func (s *storage) AddProduct(ctx context.Context, data m.ProductRequest) (result
 func (s *storage) GetProduct(ctx context.Context, id int64) (result m.ProductResponse, err error) {
 	if err := s.ProductDB.QueryRowContext(ctx, getProductQuery, id).Scan(
 		&result.Name,
-		&result.ImageURL,
 		&result.Description,
-		&result.MaxWeight,
-		&result.CreatedAt,
-		&result.CreatedBy,
-		&result.UpdatedAt,
-		&result.UpdatedBy,
+		&result.Price,
+		&result.Discount,
+		&result.Stock,
 	); err != nil {
 		log.Println("[ProductModule][GetProduct] problem querying to db, err: ", err.Error())
 		return result, err
@@ -73,13 +67,10 @@ func (s *storage) GetProductAll(ctx context.Context) (result []m.ProductResponse
 		if err = rows.Scan(
 			&rowData.ID,
 			&rowData.Name,
-			&rowData.ImageURL,
 			&rowData.Description,
-			&rowData.MaxWeight,
-			&rowData.CreatedAt,
-			&rowData.CreatedBy,
-			&rowData.UpdatedAt,
-			&rowData.UpdatedBy,
+			&rowData.Price,
+			&rowData.Discount,
+			&rowData.Stock,
 		); err != nil {
 			log.Println("[ProductModule][GetProductAll] problem with scanning db row, err: ", err.Error())
 			return
@@ -93,13 +84,10 @@ func (s *storage) GetProductAll(ctx context.Context) (result []m.ProductResponse
 func (s *storage) UpdateProduct(ctx context.Context, id int64, param m.ProductRequest) (result m.ProductResponse, err error) {
 	res, err := s.ProductDB.ExecContext(ctx, updateProductQuery,
 		param.Name,
-		param.ImageURL,
 		param.Description,
-		param.MaxWeight,
-		param.CreatedAt,
-		param.CreatedBy,
-		param.UpdatedAt,
-		param.UpdatedBy,
+		param.Price,
+		param.Discount,
+		param.Stock,
 		id,
 	)
 	if err != nil {
