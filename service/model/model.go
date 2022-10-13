@@ -12,7 +12,7 @@ type ProductResponse struct {
 type ProductRequest struct {
 	Name        string `json:"product_name"`
 	Description string `json:"product_description"`
-	Price       int    `json:"product_price,omitempty" db:"price"`
-	Discount    int    `json:"product_discount,omitempty" db:"discount"`
-	Stock       int    `json:"product_stock,omitempty" db:"stock"`
+	Price       int    `json:"product_price"`
+	Discount    int    `json:"product_discount"`
+	Stock       int    `json:"product_stock"`
 }

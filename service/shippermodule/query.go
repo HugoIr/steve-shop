@@ -7,13 +7,13 @@ const (
 		description,
 		price,
 		discount,
-		stock,
+		stock
 	) VALUES (
 		$1,
 		$2,
 		$3,
 		$4,
-		$5,
+		$5
 	) returning id
 `
 	getProductQuery = `
@@ -23,7 +23,7 @@ const (
 		max_weight,
 		price,
 		discount,
-		stock,
+		stock
 	FROM
 		product
 	WHERE
@@ -45,7 +45,7 @@ const (
 		description=$2,
 		price=$3,
 		discount=$4,
-		stock=$5,
+		stock=$5
 	WHERE
 		id=$6
 	returning id	

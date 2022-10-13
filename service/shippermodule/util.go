@@ -3,7 +3,6 @@ package shippermodule
 import (
 	"errors"
 	"fmt"
-	"time"
 
 	m "github.com/HugoIr/steve-shop/service/model"
 )
@@ -12,26 +11,17 @@ func SanitizeInsert(param m.ProductRequest) (m.ProductRequest, error) {
 	if param.Name == "" {
 		return param, errors.New("name cannot be empty")
 	}
-	if param.ImageURL == "" {
-		return param, errors.New("image url cannot be empty")
-	}
 	if param.Description == "" {
 		return param, errors.New("description cannot be empty")
 	}
-	if param.MaxWeight < 0 {
+	if param.Price < 0 {
 		return param, errors.New("invalid rating range")
 	}
-	if param.CreatedAt.IsZero() {
-		param.CreatedAt = time.Now()
+	if param.Discount < 0 {
+		return param, errors.New("invalid rating range")
 	}
-	if param.CreatedBy == 0 {
-		param.CreatedBy = 99999
-	}
-	if param.UpdatedAt.IsZero() {
-		param.UpdatedAt = time.Now()
-	}
-	if param.UpdatedBy == 0 {
-		param.UpdatedBy = 99999
+	if param.Stock < 0 {
+		return param, errors.New("invalid rating range")
 	}
 
 	return param, nil
@@ -47,33 +37,27 @@ func BuildQuery(id int64, param m.ProductRequest) (finalQuery string, fieldValue
 		fieldValues = append(fieldValues, param.Name)
 		i++
 	}
-	if param.ImageURL != "" {
-		fieldQuery += fmt.Sprintf("image_url=$%d,", i)
-		fieldValues = append(fieldValues, param.ImageURL)
-		i++
-	}
 	if param.Description != "" {
 		fieldQuery += fmt.Sprintf("description=$%d,", i)
 		fieldValues = append(fieldValues, param.Description)
 		i++
 	}
-	if param.MaxWeight != 0 {
-		fieldQuery += fmt.Sprintf("max_weight=$%d,", i)
-		fieldValues = append(fieldValues, param.MaxWeight)
+	if param.Price != 0 {
+		fieldQuery += fmt.Sprintf("price=$%d,", i)
+		fieldValues = append(fieldValues, param.Price)
 		i++
 	}
-	if param.UpdatedBy != 0 {
-		fieldQuery += fmt.Sprintf("updated_by=$%d,", i)
-		fieldValues = append(fieldValues, param.UpdatedBy)
+	if param.Discount != 0 {
+		fieldQuery += fmt.Sprintf("discount=$%d,", i)
+		fieldValues = append(fieldValues, param.Discount)
 		i++
-	} else {
-		fieldQuery += fmt.Sprintf("updated_by=$%d,", i)
-		fieldValues = append(fieldValues, 99999)
+	}
+	if param.Stock != 0 {
+		fieldQuery += fmt.Sprintf("stock=$%d,", i)
+		fieldValues = append(fieldValues, param.Stock)
 		i++
 	}
 
-	fieldQuery += fmt.Sprintf("updated_at=$%d,", i)
-	fieldValues = append(fieldValues, param.UpdatedAt)
 	i++
 
 	finalQuery = fmt.Sprintf(updateProductQuery, fieldQuery[:len(fieldQuery)-1], id)
